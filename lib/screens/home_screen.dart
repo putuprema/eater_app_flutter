@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Theme.of(context).primaryColor,
           statusBarIconBrightness: Brightness.light,
-          statusBarBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
         ),
         title: SvgPicture.asset(
           'assets/eater-logo-full.svg',
