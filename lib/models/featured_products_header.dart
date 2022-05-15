@@ -9,7 +9,11 @@ class FeaturedProductsHeader {
       {required this.category, required this.products});
 
   factory FeaturedProductsHeader.fromJson(Map<String, dynamic> json) {
+    List<dynamic> productsJson = json['products'];
+
     return FeaturedProductsHeader(
-        category: json['category'], products: json['products']);
+      category: ProductCategory.fromJson(json['category']),
+      products: productsJson.map((e) => Product.fromJson(e)).toList(),
+    );
   }
 }
