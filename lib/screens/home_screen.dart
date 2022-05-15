@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
 
     newTabController.addListener(() {
-      if (_tabController!.indexIsChanging) {
+      if (newTabController.indexIsChanging) {
         _setTabTappedFalseTimer?.cancel();
       } else {
         _setTabTappedFalseTimer = Timer(
