@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:eater_app_flutter/models/featured_products_header.dart';
 import 'package:eater_app_flutter/models/product_category.dart';
-
 import 'package:http/http.dart' as http;
 
 class ProductService {

@@ -5,7 +5,7 @@ import 'package:eater_app_flutter/models/product_category.dart';
 import 'package:eater_app_flutter/services/product_service.dart';
 import 'package:eater_app_flutter/widgets/featured_product_head.dart';
 import 'package:eater_app_flutter/widgets/skeletons/featured_products_skeleton.dart';
-import 'package:eater_app_flutter/widgets/skeletons/skeleton_tabs.dart';
+import 'package:eater_app_flutter/widgets/skeletons/tabs_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: const SkeletonTabs(),
+                child: const TabsSkeleton(),
               );
             },
           ),

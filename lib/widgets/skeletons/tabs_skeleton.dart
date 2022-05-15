@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-class SkeletonTabs extends StatelessWidget {
-  const SkeletonTabs({Key? key}) : super(key: key);
+class TabsSkeleton extends StatelessWidget {
+  const TabsSkeleton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
