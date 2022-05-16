@@ -3,40 +3,30 @@ import 'package:eater_app_flutter/models/product.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CartService {
-  final BehaviorSubject<CartItem?> _cartItemEvent =
-      BehaviorSubject.seeded(null);
-
   final Map<String, CartItem> _items = {};
 
+  final BehaviorSubject<Map<String, CartItem>> _itemsSubject =
+      BehaviorSubject.seeded({});
+
   Stream<CartItem?> getItem(String productId) {
-    _cartItemEvent.add(_items[productId]);
-    return _cartItemEvent.where((event) => event?.id == productId);
+    return _itemsSubject.map((map) => map[productId]).distinct();
   }
 
   void addItem(Product p) {
-    final cartItem = CartItem(p: p, qty: 1);
-    _items[p.id] = cartItem;
-
-    _cartItemEvent.add(cartItem);
+    _items[p.id] = CartItem(product: p, qty: 1);
+    _itemsSubject.add(_items);
   }
 
   void setItemQty(String productId, int qty) {
-    final cartItem = _items[productId];
-
-    if (cartItem != null) {
-      cartItem.qty = qty;
-      _cartItemEvent.add(cartItem);
+    final item = _items[productId];
+    if (item != null) {
+      _items[productId] = item.clone(qty);
+      _itemsSubject.add(_items);
     }
   }
 
   void removeItem(String productId) {
-    final cartItem = _items[productId];
-
-    if (cartItem != null) {
-      _items.remove(productId);
-
-      cartItem.qty = 0;
-      _cartItemEvent.add(cartItem);
-    }
+    _items.remove(productId);
+    _itemsSubject.add(_items);
   }
 }
