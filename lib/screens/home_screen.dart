@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:eater_app_flutter/models/featured_products_header.dart';
 import 'package:eater_app_flutter/models/product_category.dart';
 import 'package:eater_app_flutter/services/product_service.dart';
+import 'package:eater_app_flutter/widgets/checkout_fab.dart';
 import 'package:eater_app_flutter/widgets/featured_product_head.dart';
 import 'package:eater_app_flutter/widgets/skeletons/featured_products_skeleton.dart';
 import 'package:eater_app_flutter/widgets/skeletons/tabs_skeleton.dart';
@@ -21,12 +22,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _productService = GetIt.I.get<ProductService>();
-  final _productScrollController = ItemScrollController();
-  final _productPositionListener = ItemPositionsListener.create();
-  final _productFirstPosStreamCtrl = StreamController<ItemPosition>();
+
+  final _listViewScrollController = ItemScrollController();
+  final _listItemPositionListener = ItemPositionsListener.create();
+  final _listNextVisibleItemStreamCtrl = StreamController<ItemPosition>();
 
   bool _tabTapped = false;
-  StreamSubscription? _productFirstPosUpdtSubscription;
+  StreamSubscription? _listNextVisibleItemSubscription;
   TabController? _tabController;
   Timer? _setTabTappedFalseTimer;
 
@@ -34,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _productPositionListener.itemPositions.addListener(() {
-      final itemPositions = _productPositionListener.itemPositions.value;
+    _listItemPositionListener.itemPositions.addListener(() {
+      final itemPositions = _listItemPositionListener.itemPositions.value;
 
       final nextVisibleItems = itemPositions.where(
         (i) => i.itemLeadingEdge >= 0 && i.itemLeadingEdge <= 0.1,
@@ -43,11 +45,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       if (nextVisibleItems.isNotEmpty) {
         final first = nextVisibleItems.first;
-        _productFirstPosStreamCtrl.add(first);
+        _listNextVisibleItemStreamCtrl.add(first);
       }
     });
 
-    _productFirstPosUpdtSubscription = _productFirstPosStreamCtrl.stream
+    _listNextVisibleItemSubscription = _listNextVisibleItemStreamCtrl.stream
         .distinct((prev, next) => prev.index == next.index)
         .listen(
       (item) {
@@ -86,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _tabTapped = true;
     _tabController?.index = index;
 
-    _productScrollController.scrollTo(
+    _listViewScrollController.scrollTo(
       index: index,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOutCubic,
@@ -106,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           'assets/eater-logo-full.svg',
           height: 30,
         ),
-        leading: TextButton(onPressed: () {}, child: const Icon(Icons.menu)),
+        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
         centerTitle: true,
         foregroundColor: Theme.of(context).primaryColor,
         backgroundColor: Colors.white,
@@ -146,8 +148,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
             if (data.isNotEmpty) {
               return ScrollablePositionedList.separated(
-                itemScrollController: _productScrollController,
-                itemPositionsListener: _productPositionListener,
+                itemScrollController: _listViewScrollController,
+                itemPositionsListener: _listItemPositionListener,
                 padding: const EdgeInsets.only(
                   bottom: 60,
                   top: 4,
@@ -183,19 +185,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           );
         },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _toggleShowTabs,
-      //   backgroundColor: Theme.of(context).primaryColor,
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: const CheckoutFab(),
     );
   }
 
   @override
   void dispose() async {
     _setTabTappedFalseTimer?.cancel();
-    await _productFirstPosUpdtSubscription?.cancel();
-    await _productFirstPosStreamCtrl.close();
+    await _listNextVisibleItemSubscription?.cancel();
+    await _listNextVisibleItemStreamCtrl.close();
 
     super.dispose();
   }

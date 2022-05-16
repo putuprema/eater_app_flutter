@@ -23,7 +23,8 @@ class _FeaturedProductHeadState extends State<FeaturedProductHead> {
         children: [
           Text(
             widget.data.category.name,
-            style: const TextStyle(
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),

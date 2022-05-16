@@ -40,17 +40,13 @@ class ProductCard extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(8),
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.circular(20),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white24,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: Colors.black26,
                           width: 0.25,
@@ -98,13 +94,21 @@ class ProductCard extends StatelessWidget {
               Text(
                 data.name,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 _currencyFormatter.format(data.price),
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
               const SizedBox(height: 10),
               StreamBuilder(
@@ -137,6 +141,7 @@ class ProductCard extends StatelessWidget {
                           child: Text(
                             '${itemInCart.qty}',
                             textAlign: TextAlign.center,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                         Expanded(
@@ -159,12 +164,15 @@ class ProductCard extends StatelessWidget {
                     );
                   }
 
-                  return ElevatedButton(
+                  return OutlinedButton(
                     onPressed: () {
                       _cartService.addItem(data);
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
                       minimumSize: const Size.fromHeight(32),
+                      side: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

@@ -119,7 +119,10 @@ class ProductDetailSheet extends StatelessWidget {
                       child: Text(
                         '${itemInCart.qty}',
                         textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Expanded(

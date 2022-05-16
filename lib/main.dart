@@ -21,6 +21,7 @@ class EaterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Eater',
       theme: ThemeData(
         primarySwatch: Pallete.eaterPrimary,
