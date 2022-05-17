@@ -1,8 +1,8 @@
 import 'dart:ui';
 
+import 'package:eater_app_flutter/interfaces/i_cart_service.dart';
 import 'package:eater_app_flutter/models/cart_item.dart';
 import 'package:eater_app_flutter/models/product.dart';
-import 'package:eater_app_flutter/services/cart_service.dart';
 import 'package:eater_app_flutter/widgets/product_detail_sheet.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class ProductCard extends StatelessWidget {
 
   final Product data;
 
-  final _cartService = GetIt.I.get<CartService>();
+  final _cartService = GetIt.I.get<ICartService>();
   final _currencyFormatter = NumberFormat.simpleCurrency(
     locale: "id_ID",
     decimalDigits: 0,

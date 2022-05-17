@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:eater_app_flutter/interfaces/i_product_service.dart';
 import 'package:eater_app_flutter/models/featured_products_header.dart';
 import 'package:eater_app_flutter/models/product_category.dart';
-import 'package:eater_app_flutter/services/product_service.dart';
 import 'package:eater_app_flutter/widgets/checkout_fab.dart';
 import 'package:eater_app_flutter/widgets/featured_product_head.dart';
 import 'package:eater_app_flutter/widgets/skeletons/featured_products_skeleton.dart';
@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  final _productService = GetIt.I.get<ProductService>();
+  final _productService = GetIt.I.get<IProductService>();
 
   final _listViewScrollController = ItemScrollController();
   final _listItemPositionListener = ItemPositionsListener.create();

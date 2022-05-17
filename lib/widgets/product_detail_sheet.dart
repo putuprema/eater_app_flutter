@@ -1,6 +1,6 @@
+import 'package:eater_app_flutter/interfaces/i_cart_service.dart';
 import 'package:eater_app_flutter/models/cart_item.dart';
 import 'package:eater_app_flutter/models/product.dart';
-import 'package:eater_app_flutter/services/cart_service.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductDetailSheet extends StatelessWidget {
-  final _cartService = GetIt.I.get<CartService>();
+  final _cartService = GetIt.I.get<ICartService>();
   final _currencyFormatter = NumberFormat.simpleCurrency(
     locale: "id_ID",
     decimalDigits: 0,

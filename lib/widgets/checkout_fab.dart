@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:badges/badges.dart';
-import 'package:eater_app_flutter/services/cart_service.dart';
+import 'package:eater_app_flutter/interfaces/i_cart_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +19,7 @@ class _CheckoutFabState extends State<CheckoutFab>
     locale: "id_ID",
     decimalDigits: 0,
   );
-  final _cartService = GetIt.I.get<CartService>();
+  final _cartService = GetIt.I.get<ICartService>();
 
   late StreamSubscription _itemCountSubscription;
   late StreamSubscription _totalPriceSubscription;

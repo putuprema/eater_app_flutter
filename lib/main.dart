@@ -1,3 +1,5 @@
+import 'package:eater_app_flutter/interfaces/i_cart_service.dart';
+import 'package:eater_app_flutter/interfaces/i_product_service.dart';
 import 'package:eater_app_flutter/pallete.dart';
 import 'package:eater_app_flutter/screens/home_screen.dart';
 import 'package:eater_app_flutter/services/cart_service.dart';
@@ -7,8 +9,8 @@ import 'package:get_it/get_it.dart';
 
 void main() {
   // Register services
-  GetIt.I.registerSingleton(CartService());
-  GetIt.I.registerSingleton(ProductService());
+  GetIt.I.registerSingleton<ICartService>(CartService());
+  GetIt.I.registerSingleton<IProductService>(ProductService());
 
   // Run the application
   runApp(const EaterApp());
