@@ -126,12 +126,6 @@ class ProductCard extends StatelessWidget {
                             onPressed: () => setItemQty(itemInCart.qty - 1),
                             style: OutlinedButton.styleFrom(
                               minimumSize: const Size.fromHeight(32),
-                              side: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
                             ),
                             child: const Text("-"),
                           ),
@@ -150,12 +144,6 @@ class ProductCard extends StatelessWidget {
                             onPressed: () => setItemQty(itemInCart.qty + 1),
                             style: OutlinedButton.styleFrom(
                               minimumSize: const Size.fromHeight(32),
-                              side: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
                             ),
                             child: const Text("+"),
                           ),
@@ -170,12 +158,6 @@ class ProductCard extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       minimumSize: const Size.fromHeight(32),
-                      side: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                     ),
                     child: const Text("ADD +"),
                   );

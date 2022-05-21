@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:badges/badges.dart';
 import 'package:eater_app_flutter/interfaces/i_cart_service.dart';
+import 'package:eater_app_flutter/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -72,7 +73,15 @@ class _CheckoutFabState extends State<CheckoutFab>
     return FractionalTranslation(
       translation: Offset(_animation.value, 0.0),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          ScaffoldMessenger.of(context).clearSnackBars();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CartScreen(),
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           elevation: 10,
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -85,9 +94,10 @@ class _CheckoutFabState extends State<CheckoutFab>
           children: [
             Badge(
               toAnimate: false,
+              badgeColor: Colors.blue,
               badgeContent: Text(
                 _itemCount.toString(),
-                style: const TextStyle(fontSize: 10),
+                style: const TextStyle(fontSize: 10, color: Colors.white),
               ),
               child: const Icon(Icons.shopping_cart),
             ),

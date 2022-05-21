@@ -102,12 +102,6 @@ class ProductDetailSheet extends StatelessWidget {
                       flex: 3,
                       child: ElevatedButton(
                         onPressed: () => setItemQty(itemInCart.qty - 1),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(32),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                         child: const Text(
                           "-",
                           style: TextStyle(color: Colors.white),
@@ -129,12 +123,6 @@ class ProductDetailSheet extends StatelessWidget {
                       flex: 3,
                       child: ElevatedButton(
                         onPressed: () => setItemQty(itemInCart.qty + 1),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(32),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                         child: const Text("+"),
                       ),
                     ),
@@ -147,10 +135,7 @@ class ProductDetailSheet extends StatelessWidget {
                   _cartService.addItem(product);
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(32),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  minimumSize: const Size.fromHeight(36),
                 ),
                 child: const Text("ADD +"),
               );

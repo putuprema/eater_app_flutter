@@ -10,6 +10,10 @@ class CartService implements ICartService {
       BehaviorSubject.seeded({});
 
   @override
+  Stream<List<CartItem>> get items$ =>
+      _itemsSubject.map((event) => event.values.toList());
+
+  @override
   Stream<int> get itemCount$ => _itemsSubject.map((map) => map.length);
 
   @override
@@ -47,6 +51,12 @@ class CartService implements ICartService {
   @override
   void removeItem(String productId) {
     _items.remove(productId);
+    _itemsSubject.add(_items);
+  }
+
+  @override
+  void clear() {
+    _items.clear();
     _itemsSubject.add(_items);
   }
 }

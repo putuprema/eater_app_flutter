@@ -16,7 +16,9 @@ class TabsSkeleton extends StatelessWidget {
         padding: const EdgeInsets.only(left: 0, right: 0, bottom: 10),
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(8)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
       ),
     );
